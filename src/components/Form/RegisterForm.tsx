@@ -13,7 +13,7 @@ const yupRegisterSchema = yup.object().shape({
   name: yup.string().min(4).required(),
 });
 
-export const RegisterForm: React.FC = () => {
+export const RegisterForm: React.FC = (): JSX.Element => {
   const { setUser, setIsLoading } = useContext(AuthContext);
 
   const {

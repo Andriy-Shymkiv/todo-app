@@ -16,7 +16,7 @@ interface LoginFormProps {
   onScreenChange: (screen: AUTH_FORM_SCREEN) => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onScreenChange }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ onScreenChange }): JSX.Element => {
   const { setUser, setIsLoading } = useContext(AuthContext);
 
   const {

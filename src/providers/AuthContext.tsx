@@ -20,7 +20,7 @@ const defaultProvider: AuthValuesType = {
 
 export const AuthContext = createContext(defaultProvider);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   const [user, setUser] = useState<User | null>(defaultProvider.user);
   const [isLoading, setIsLoading] = useState<boolean>(defaultProvider.isLoading);
 

@@ -25,7 +25,7 @@ export enum AUTH_FORM_SCREEN {
   REGISTER = 'REGISTER',
 }
 
-export const AuthForm: React.FC = () => {
+export const AuthForm: React.FC = (): JSX.Element => {
   const [screen, setScreen] = useState<AUTH_FORM_SCREEN>(AUTH_FORM_SCREEN.LOGIN);
 
   return (

@@ -5,7 +5,7 @@ import { getUserFromLocalStorage } from '~/helpers/localStorage';
 import { User } from '~/types/User';
 import { AuthContext } from '../providers/AuthContext';
 
-export const AuthGuard = ({ children }: { children: ReactNode }) => {
+export const AuthGuard = ({ children }: { children: ReactNode }): JSX.Element => {
   const { user, setUser, isLoading, setIsLoading } = useContext(AuthContext);
 
   const initAuth = useCallback(() => {

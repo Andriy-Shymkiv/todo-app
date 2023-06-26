@@ -11,6 +11,6 @@ const StyledContentWrapper = styled(Box, {
   justifyContent: 'center',
 });
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
   return <StyledContentWrapper>{children}</StyledContentWrapper>;
 };
