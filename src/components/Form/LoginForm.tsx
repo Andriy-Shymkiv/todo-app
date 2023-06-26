@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { FormControl, TextField, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { getUserByEmail } from '~/api/users';
 import { useContext } from 'react';
 import { AuthContext } from '~/providers/AuthContext';
-import { AUTH_FORM_SCREEN, StyledAuthInputErrorMessage, StyledForm } from './AuthForm';
+import { AUTH_FORM_SCREEN, StyledForm } from './AuthForm';
 import { setUserInLocalStorage } from '~/helpers/localStorage';
+import { EmailInput } from '../Inputs/EmailInput';
 
 const yupLoginSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -46,25 +47,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onScreenChange }): JSX.Ele
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <FormControl fullWidth>
-        <Controller
-          name='email'
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextField
-              autoComplete='email'
-              label='Email'
-              value={value}
-              onBlur={onBlur}
-              onChange={onChange}
-              error={Boolean(errors.email)}
-              placeholder='example@com'
-            />
-          )}
-        />
-        {errors.email && <StyledAuthInputErrorMessage>{errors.email.message}</StyledAuthInputErrorMessage>}
-      </FormControl>
+      <EmailInput control={control} errors={errors} />
 
       <Button variant={'contained'} type={'submit'} disabled={Boolean(Object.keys(errors).length)}>
         {'Log in'}

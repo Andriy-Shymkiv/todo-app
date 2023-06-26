@@ -5,7 +5,7 @@ import { useTodos } from './hooks/useTodos';
 
 export const App: React.FC = (): JSX.Element => {
   const { logout, user } = useContext(AuthContext);
-  const { data: todos } = useTodos(user?.id.toString());
+  const { data: todos } = useTodos(String(user?.id));
 
   return (
     <>

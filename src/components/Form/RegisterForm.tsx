@@ -1,12 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { FormControl, TextField, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { createUser } from '~/api/users';
 import { useContext } from 'react';
 import { AuthContext } from '~/providers/AuthContext';
-import { StyledForm, StyledAuthInputErrorMessage } from './AuthForm';
+import { StyledForm } from './AuthForm';
 import { setUserInLocalStorage } from '~/helpers/localStorage';
+import { EmailInput } from '../Inputs/EmailInput';
+import { NameInput } from '../Inputs/NameInput';
 
 const yupRegisterSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -40,44 +42,8 @@ export const RegisterForm: React.FC = (): JSX.Element => {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <FormControl fullWidth>
-        <Controller
-          name='email'
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextField
-              autoComplete='email'
-              label='Email'
-              value={value}
-              onBlur={onBlur}
-              onChange={onChange}
-              error={Boolean(errors.email)}
-              placeholder='example@com'
-            />
-          )}
-        />
-        {errors.email && <StyledAuthInputErrorMessage>{errors.email.message}</StyledAuthInputErrorMessage>}
-      </FormControl>
-
-      <FormControl fullWidth>
-        <Controller
-          name='name'
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { value, onChange, onBlur } }) => (
-            <TextField
-              label='Name'
-              value={value}
-              onBlur={onBlur}
-              onChange={onChange}
-              error={Boolean(errors.name)}
-              placeholder='your name'
-            />
-          )}
-        />
-        {errors.name && <StyledAuthInputErrorMessage>{errors.name.message}</StyledAuthInputErrorMessage>}
-      </FormControl>
+      <EmailInput control={control} errors={errors} />
+      <NameInput control={control} errors={errors} />
 
       <Button variant={'contained'} type={'submit'} disabled={Boolean(Object.keys(errors).length)}>
         {'Sign up'}
