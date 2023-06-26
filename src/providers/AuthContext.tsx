@@ -6,9 +6,16 @@ type AuthValuesType = {
   setUser: (value: User | null) => void;
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
+  logout: () => void;
 };
 
-const defaultProvider: AuthValuesType = { user: null, setUser: () => null, isLoading: true, setIsLoading: () => null };
+const defaultProvider: AuthValuesType = {
+  user: null,
+  setUser: () => null,
+  isLoading: true,
+  setIsLoading: () => null,
+  logout: () => null,
+};
 
 export const AuthContext = createContext(defaultProvider);
 
@@ -16,5 +23,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(defaultProvider.user);
   const [isLoading, setIsLoading] = useState<boolean>(defaultProvider.isLoading);
 
-  return <AuthContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>{children}</AuthContext.Provider>;
+  const logout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    setIsLoading(true);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, isLoading, setIsLoading, logout }}>{children}</AuthContext.Provider>
+  );
 };

@@ -1,17 +1,7 @@
 import { useState } from 'react';
-import { Typography, Box, FormHelperText, styled } from '@mui/material';
+import { Typography, FormHelperText, styled } from '@mui/material';
 import { LoginForm } from './LoginForm';
 import { RegisterForm } from './RegisterForm';
-
-const StyledContentWrapper = styled(Box, {
-  name: 'StyledContentWrapper',
-})({
-  height: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  justifyContent: 'center',
-});
 
 export const StyledForm = styled('form', {
   name: 'StyledForm',
@@ -39,13 +29,13 @@ export const AuthForm: React.FC = () => {
   const [screen, setScreen] = useState<AUTH_FORM_SCREEN>(AUTH_FORM_SCREEN.LOGIN);
 
   return (
-    <StyledContentWrapper>
+    <>
       <Typography variant='h4' mb={8}>
         {screen === AUTH_FORM_SCREEN.LOGIN && 'Log in to open todos'}
         {screen === AUTH_FORM_SCREEN.REGISTER && 'You need to register'}
       </Typography>
       {screen === AUTH_FORM_SCREEN.LOGIN && <LoginForm onScreenChange={setScreen} />}
       {screen === AUTH_FORM_SCREEN.REGISTER && <RegisterForm />}
-    </StyledContentWrapper>
+    </>
   );
 };

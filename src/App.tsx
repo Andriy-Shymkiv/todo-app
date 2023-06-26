@@ -3,20 +3,13 @@ import { AuthContext } from './providers/AuthContext';
 import { Typography, Button } from '@mui/material';
 
 export const App = () => {
-  const { setUser, setIsLoading } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   return (
     <>
       <Typography variant='h5'>{'todo'}</Typography>
-      <Button
-        variant={'contained'}
-        onClick={() => {
-          localStorage.removeItem('user');
-          setUser(null);
-          setIsLoading(true);
-        }}
-      >
-        logout
+      <Button variant={'contained'} onClick={() => logout()}>
+        {'Logout'}
       </Button>
     </>
   );

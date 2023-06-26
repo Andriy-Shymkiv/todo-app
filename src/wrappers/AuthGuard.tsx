@@ -1,8 +1,8 @@
+import { CircularProgress } from '@mui/material';
 import { ReactNode, useCallback, useContext, useEffect } from 'react';
 import { AuthForm } from '~/components/Form/AuthForm';
-import { Spinner } from '~/components/Spinner';
 import { User } from '~/types/User';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from '../providers/AuthContext';
 
 export const AuthGuard = ({ children }: { children: ReactNode }) => {
   const { user, setUser, isLoading, setIsLoading } = useContext(AuthContext);
@@ -24,7 +24,7 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
     initAuth();
   }, [setUser, isLoading, initAuth]);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <CircularProgress />;
   if (!user) return <AuthForm />;
 
   return <>{children}</>;
