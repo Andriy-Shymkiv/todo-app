@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { AuthContext } from './context/AuthContext';
+import { AuthContext } from './providers/AuthContext';
 import { Typography, Button } from '@mui/material';
 
 export const App = () => {
-  const { setUser } = useContext(AuthContext);
+  const { setUser, setIsLoading } = useContext(AuthContext);
 
   return (
     <>
@@ -13,6 +13,7 @@ export const App = () => {
         onClick={() => {
           localStorage.removeItem('user');
           setUser(null);
+          setIsLoading(true);
         }}
       >
         logout
