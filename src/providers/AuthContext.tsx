@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from 'react';
+import { removeUserFromLocalStorage } from '~/helpers/localStorage';
 import { User } from '~/types/User';
 
 type AuthValuesType = {
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState<boolean>(defaultProvider.isLoading);
 
   const logout = () => {
-    localStorage.removeItem('user');
+    removeUserFromLocalStorage();
     setUser(null);
     setIsLoading(true);
   };

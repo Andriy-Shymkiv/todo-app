@@ -1,6 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import { ReactNode, useCallback, useContext, useEffect } from 'react';
 import { AuthForm } from '~/components/Form/AuthForm';
+import { getUserFromLocalStorage } from '~/helpers/localStorage';
 import { User } from '~/types/User';
 import { AuthContext } from '../providers/AuthContext';
 
@@ -8,7 +9,7 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
   const { user, setUser, isLoading, setIsLoading } = useContext(AuthContext);
 
   const initAuth = useCallback(() => {
-    const userData = localStorage.getItem('user');
+    const userData = getUserFromLocalStorage();
     if (!userData) {
       setTimeout(() => setIsLoading(false), 800);
       return;

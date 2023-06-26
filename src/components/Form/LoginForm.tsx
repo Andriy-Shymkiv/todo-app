@@ -6,6 +6,7 @@ import { getUserByEmail } from '~/api/users';
 import { useContext } from 'react';
 import { AuthContext } from '~/providers/AuthContext';
 import { AUTH_FORM_SCREEN, StyledAuthInputErrorMessage, StyledForm } from './AuthForm';
+import { setUserInLocalStorage } from '~/helpers/localStorage';
 
 const yupLoginSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -37,7 +38,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onScreenChange }) => {
       }
       setIsLoading(true);
       setUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
+      setUserInLocalStorage(user);
     } catch (error) {
       onScreenChange(AUTH_FORM_SCREEN.REGISTER);
     }

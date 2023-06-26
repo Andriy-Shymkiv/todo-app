@@ -6,6 +6,7 @@ import { createUser } from '~/api/users';
 import { useContext } from 'react';
 import { AuthContext } from '~/providers/AuthContext';
 import { StyledForm, StyledAuthInputErrorMessage } from './AuthForm';
+import { setUserInLocalStorage } from '~/helpers/localStorage';
 
 const yupRegisterSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -31,7 +32,7 @@ export const RegisterForm: React.FC = () => {
       setIsLoading(true);
       const user = await createUser({ email, name });
       setUser(user);
-      localStorage.setItem('user', JSON.stringify(user));
+      setUserInLocalStorage(user);
     } catch (error) {
       // TODO: handle error
     }
