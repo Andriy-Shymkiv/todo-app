@@ -14,7 +14,7 @@ export const NameInput: React.FC<NameInputProps> = ({ control, errors }): JSX.El
         name='name'
         control={control}
         rules={{ required: true }}
-        render={({ field: { value, onChange, onBlur } }) => (
+        render={({ field: { value, onChange, onBlur } }): JSX.Element => (
           <TextField
             label='Name'
             value={value}

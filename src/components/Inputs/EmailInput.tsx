@@ -15,7 +15,7 @@ export const EmailInput: React.FC<EmailInputProps> = ({ control, errors }): JSX.
         name='email'
         control={control}
         rules={{ required: true }}
-        render={({ field: { value, onChange, onBlur } }) => (
+        render={({ field: { value, onChange, onBlur } }): JSX.Element => (
           <TextField
             autoComplete='email'
             label='Email'

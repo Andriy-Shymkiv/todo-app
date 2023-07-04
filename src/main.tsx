@@ -14,7 +14,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
-const Root = () => (
+const Root = (): JSX.Element => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <AuthProvider>

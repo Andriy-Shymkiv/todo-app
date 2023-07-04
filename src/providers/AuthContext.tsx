@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
   const [user, setUser] = useState<User | null>(defaultProvider.user);
   const [isLoading, setIsLoading] = useState<boolean>(defaultProvider.isLoading);
 
-  const logout = () => {
+  const logout = (): void => {
     removeUserFromLocalStorage();
     setUser(null);
     setIsLoading(true);

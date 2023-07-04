@@ -30,7 +30,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onScreenChange }): JSX.Ele
     resolver: yupResolver(yupLoginSchema),
   });
 
-  const onSubmit = async ({ email }: { email: string }) => {
+  const onSubmit = async ({ email }: { email: string }): Promise<void> => {
     try {
       const user = await getUserByEmail(email);
       if (!user) {

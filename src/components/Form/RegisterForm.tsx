@@ -29,7 +29,7 @@ export const RegisterForm: React.FC = (): JSX.Element => {
     resolver: yupResolver(yupRegisterSchema),
   });
 
-  const onSubmit = async ({ email, name }: { email: string; name: string }) => {
+  const onSubmit = async ({ email, name }: { email: string; name: string }): Promise<void> => {
     try {
       setIsLoading(true);
       const user = await createUser({ email, name });

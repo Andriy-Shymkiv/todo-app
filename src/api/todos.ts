@@ -8,14 +8,14 @@ export const getTodos = async (userId: string): Promise<Todo[]> => {
   return todos;
 };
 
-export const addTodo = async (todo: Todo) => {
+export const addTodo = async (todo: Todo): Promise<any> => {
   return await axios.post(`${BASE_URL}/todos`, todo);
 };
 
-export const removeTodo = async (todoId: number) => {
+export const removeTodo = async (todoId: number): Promise<any> => {
   return await axios.delete(`${BASE_URL}/todos/${todoId}`);
 };
 
-export const updateTodo = async (todoId: number, todo: Todo) => {
+export const updateTodo = async (todoId: number, todo: Todo): Promise<any> => {
   return await axios.patch(`${BASE_URL}/todos/${todoId}`, todo);
 };

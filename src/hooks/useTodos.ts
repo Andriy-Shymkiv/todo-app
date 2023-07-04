@@ -5,7 +5,7 @@ import { Todo } from '~/types/Todo';
 
 export const constructTodosCacheKey = (userId: string): any[] => ['todos', userId];
 
-export const useTodos = (userId?: string): UseQueryResult<Todo[]> => {
+export const useTodos = (userId: string): UseQueryResult<Todo[]> => {
   return useQuery<Todo[]>(constructTodosCacheKey(userId ?? ''), () => getTodos(userId ?? ''), {
     enabled: !!userId,
     cacheTime: ONE_MINUTE,
