@@ -20,7 +20,6 @@ export const RegisterForm: React.FC = (): JSX.Element => {
 
   const {
     control,
-    // setError,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -36,7 +35,8 @@ export const RegisterForm: React.FC = (): JSX.Element => {
       setUser(user);
       setUserInLocalStorage(user);
     } catch (error) {
-      // TODO: handle error
+      console.error('createUser error:', error);
+      throw new Error('error creating user');
     }
   };
 

@@ -11,5 +11,7 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 type UserData = Pick<User, 'name' | 'email'>;
 
 export const createUser = async ({ email, name }: UserData): Promise<User> => {
-  return axios.post(`${BASE_URL}/users`, { email, name });
+  const { data: user } = await axios.post(`${BASE_URL}/users`, { email, name });
+
+  return user;
 };

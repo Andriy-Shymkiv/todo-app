@@ -68,11 +68,16 @@ export const TodoList = (): JSX.Element => {
 
   const { mutate: changeTodoStatusMutate } = useChangeTodoStatus();
 
-  const onUpdateClick = (todoId: number): void => {
+  const onUpdateTodoClick = (todoId: number): void => {
+    dispatch(setSelectedTodoId(todoId));
+    openModal({ modalType: ModalType.UPDATE_TODO });
+  };
+
+  const onUpdateStatusClick = (todoId: number): void => {
     changeTodoStatusMutate(todoId);
   };
 
-  const onDeleteClick = (todoId: number): void => {
+  const onDeleteTodoClick = (todoId: number): void => {
     dispatch(setSelectedTodoId(todoId));
     openModal({ modalType: ModalType.DELETE_TODO });
   };
@@ -82,14 +87,14 @@ export const TodoList = (): JSX.Element => {
       {!todosIsLoading
         ? todos?.map((todo) => (
             <Box display={'flex'} key={todo.id} justifyContent={'space-between'} alignItems={'center'} gap={2}>
-              <StyledTodoButton>
+              <StyledTodoButton onClick={(): void => onUpdateTodoClick(todo.id)}>
                 <StyledTodoTitle variant={'inherit'}>{todo.title}</StyledTodoTitle>
               </StyledTodoButton>
               <Box display={'flex'} gap={2}>
-                <ToggleButton onClick={(): void => onUpdateClick(todo.id)}>
+                <ToggleButton onClick={(): void => onUpdateStatusClick(todo.id)}>
                   {todo.completed ? <CheckCircleIcon color={'success'} /> : <PanoramaFishEyeIcon color={'info'} />}
                 </ToggleButton>
-                <ToggleButton onClick={(): void => onDeleteClick(todo.id)}>
+                <ToggleButton onClick={(): void => onDeleteTodoClick(todo.id)}>
                   <HighlightOffIcon color={'error'} />
                 </ToggleButton>
               </Box>

@@ -9,7 +9,7 @@ const StyledToggleButton = styled(IconButton, {
 })(({ theme }) => ({
   width: 48,
   height: 48,
-  backgroundColor: theme.palette.success.main,
+  backgroundColor: theme.palette.primary.dark,
   color: theme.palette.common.white,
 }));
 

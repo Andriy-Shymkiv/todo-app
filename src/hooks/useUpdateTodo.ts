@@ -5,6 +5,7 @@ import { updateTodo } from '~/api/todos';
 import { constructTodosCacheKey, constructUpdateTodoKey } from '~/helpers/getQueriesCache';
 import { AuthContext } from '~/providers/AuthContext';
 import { setSelectedTodoId } from '~/store/app/slice';
+import { useModalState } from '~/store/modal/hooks/useModalState';
 import { useAppDispatch, useAppSelector } from '~/store/reduxHooks';
 import { Todo } from '~/types/Todo';
 
@@ -12,6 +13,7 @@ type UseUpdateTodoInput = Pick<UseMutationOptions<void, Error, Partial<Todo>>, '
 
 export const useUpdateTodo = (): UseMutationResult<void, Error, Partial<Todo>> => {
   const { user } = useContext(AuthContext);
+  const { closeModal } = useModalState();
   const { selectedTodoId } = useAppSelector(({ app }) => app);
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
@@ -34,13 +36,14 @@ export const useUpdateTodo = (): UseMutationResult<void, Error, Partial<Todo>> =
       onSuccess: (): void => {
         queryClient.invalidateQueries(constructTodosCacheKey(user?.id));
         dispatch(setSelectedTodoId(null));
+        closeModal();
         toast.success('Todo updated successfully');
       },
       onError: (): void => {
         toast.error('Error updating todo');
       },
     }),
-    [dispatch, queryClient, user],
+    [closeModal, dispatch, queryClient, user],
   );
 
   return useMutation<void, Error, Partial<Todo>>(constructUpdateTodoKey(), handleUpdateTodo, callbacks);

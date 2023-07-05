@@ -1,10 +1,13 @@
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Typography, Button, styled } from '@mui/material';
+import { Box, Button, styled } from '@mui/material';
 import { useCallback } from 'react';
 import { useModalState } from '~/store/modal/hooks/useModalState';
 import { ModalType } from '~/store/modal/types';
 import { AppMenu } from './AppMenu';
 import { TodoStatusSwitcher } from './TodoStatusSwitcher';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { useDeleteAllTodos } from '~/hooks/useDeleteTodo';
+import { useTodos } from '~/hooks/useTodos';
 
 const StyledAddTodoButton = styled(Button, {
   name: 'StyledAddTodoButton',
@@ -19,8 +22,18 @@ const StyledAddTodoButton = styled(Button, {
     backgroundColor: theme.palette.primary.main,
   },
 }));
+
+const ToggleButton = styled(Button, {
+  name: 'ToggleButton',
+})({
+  padding: 0,
+  minWidth: 0,
+});
+
 export const Header = (): JSX.Element => {
   const { openModal } = useModalState();
+  const { data: todos } = useTodos();
+  const { mutate: onDeleteAllTodosMutate } = useDeleteAllTodos();
 
   const onAddTodoClick = useCallback((): void => {
     openModal({ modalType: ModalType.ADD_TODO });
@@ -30,9 +43,11 @@ export const Header = (): JSX.Element => {
     <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} mb={6}>
       <AppMenu />
 
-      <Typography variant='h6'>{'All Tasks'}</Typography>
-
       <Box>
+        <ToggleButton onClick={(): void => onDeleteAllTodosMutate({})} disabled={!todos?.length}>
+          <HighlightOffIcon color={'error'} />
+        </ToggleButton>
+
         <TodoStatusSwitcher />
         <StyledAddTodoButton onClick={onAddTodoClick}>
           <AddIcon fontSize='large' />

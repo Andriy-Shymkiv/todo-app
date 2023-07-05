@@ -1,7 +1,5 @@
 import { Box, Typography, Button } from '@mui/material';
 import { useDeleteTodo } from '~/hooks/useDeleteTodo';
-// import { useContext } from 'react';
-// import { AuthContext } from '~/providers/AuthContext';
 
 export const DeleteTodoModal: React.FC = () => {
   const { mutate: deleteTodoMutation } = useDeleteTodo();

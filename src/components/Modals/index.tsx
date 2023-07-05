@@ -4,10 +4,11 @@ import { ModalType } from 'src/store/modal/types';
 import { Card, styled } from '@mui/material';
 import { DeleteTodoModal } from './DeleteTodoModal';
 import { AddTodoModal } from './AddTodoModal';
+import { UpdateTodoModal } from './UpdateTodoModal';
 
 const modalComponents = {
   [ModalType.ADD_TODO]: AddTodoModal,
-  // [ModalType.UPDATE_TODO]: UpdateTodoModal,
+  [ModalType.UPDATE_TODO]: UpdateTodoModal,
   [ModalType.DELETE_TODO]: DeleteTodoModal,
 };
 
