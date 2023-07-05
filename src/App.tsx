@@ -1,25 +1,22 @@
-import { useCallback, useContext } from 'react';
-import { AuthContext } from './providers/AuthContext';
-import { Typography, Button } from '@mui/material';
-import { useTodos } from './hooks/useTodos';
+import { Card, styled } from '@mui/material';
+import { Header } from './components/Header.tsx';
+import { TodoList } from './components/Todo/TodoList';
+
+const StyledTodoAppCard = styled(Card, {
+  name: 'StyledTodoAppCard',
+})(({ theme }) => ({
+  width: 460,
+  height: 580,
+  padding: theme.spacing(6),
+  boxShadow: theme.shadows[3],
+  borderRadius: theme.spacing(1),
+}));
 
 export const App: React.FC = (): JSX.Element => {
-  const { logout, user } = useContext(AuthContext);
-  const { data: todos } = useTodos(String(user?.id));
-
-  const handleLogout = useCallback((): void => {
-    logout();
-  }, [logout]);
-
   return (
-    <>
-      <Typography variant='h5'>{'todo'}</Typography>
-      {todos?.map((todo) => (
-        <Typography key={todo.id}>{todo.title}</Typography>
-      ))}
-      <Button variant={'contained'} onClick={handleLogout}>
-        {'Logout'}
-      </Button>
-    </>
+    <StyledTodoAppCard>
+      <Header />
+      <TodoList />
+    </StyledTodoAppCard>
   );
 };

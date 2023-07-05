@@ -1,13 +1,16 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useContext } from 'react';
 import { getTodos } from '~/api/todos';
+import { constructTodosCacheKey } from '~/helpers/getQueriesCache';
 import { ONE_MINUTE } from '~/common/time';
+import { AuthContext } from '~/providers/AuthContext';
 import { Todo } from '~/types/Todo';
 
-export const constructTodosCacheKey = (userId: string): any[] => ['todos', userId];
+export const useTodos = (): UseQueryResult<Todo[]> => {
+  const { user } = useContext(AuthContext);
 
-export const useTodos = (userId: string): UseQueryResult<Todo[]> => {
-  return useQuery<Todo[]>(constructTodosCacheKey(userId ?? ''), () => getTodos(userId ?? ''), {
-    enabled: !!userId,
+  return useQuery<Todo[]>(constructTodosCacheKey(user?.id), () => getTodos(String(user?.id)), {
+    enabled: !!user?.id,
     cacheTime: ONE_MINUTE,
     staleTime: ONE_MINUTE,
   });
